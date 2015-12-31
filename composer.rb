@@ -15,9 +15,18 @@ def multiple_choice(question, choices)
   values[answer]
 end
 
+def copy_from_repo(filename, destination)
+  begin
+    remove_file destination
+    get "https://raw.github.com/41studio/rails_composer/master/files/" + filename, destination
+  rescue OpenURI::HTTPError
+    say_wizard "Unable to obtain #{filename} from the repo, please check your connection"
+  end
+end
+
 gsub_file 'Gemfile', /gem 'sqlite3'\n/, ''
 
-database_adapter = multiple_choice "Database used in development?", [["PostgreSQL", "postgresql"], ["MySQL", "mysql"]]
+database_adapter = multiple_choice "Database used in development?", [["PostgreSQL", "postgresql"], ["MySQL", "mysql2"]]
 
 if database_adapter == "postgresql"
   gem 'pg'
@@ -43,6 +52,7 @@ gem 'redis-namespace'
 gem 'redis-rails'
 gem 'jquery-turbolinks'
 gem 'friendly_id', '~> 5.1.0'
+gem 'simple_form'
 
 gem_group :development do
   gem 'thin'
@@ -112,7 +122,7 @@ inject_into_file 'app/assets/javascripts/application.js', after: "require turbol
 end
 
 inject_into_file 'app/assets/stylesheets/application.css', after: "*= require_self\n" do
-  " *= require bootstrap_modified\n  *= require npprogress-custom\n"
+  " *= require bootstrap_modified\n *= require npprogress-custom\n"
 end
 
 append_file ".gitignore" do<<-FILE
@@ -121,8 +131,16 @@ public/uploads
 FILE
 end
 
+copy_from_repo "config/database-#{database_adapter}.yml", "config/database.yml"
+
+gsub_file "config/database.yml", /database: myapp_development/, "database: #{app_name}_development"
+gsub_file "config/database.yml", /database: myapp_test/,        "database: #{app_name}_test"
+gsub_file "config/database.yml", /database: myapp_production/,  "database: #{app_name}_production"
+
 after_bundle do
   git :init
   generate 'devise:install'
   generate 'friendly_id'
+  generate 'simple_form:install --bootstrap'
+  run "bundle exec cap install STAGES=staging,production"
 end
