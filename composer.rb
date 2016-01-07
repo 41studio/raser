@@ -18,7 +18,7 @@ end
 def copy_from_repo(filename, destination)
   begin
     remove_file destination
-    get "https://raw.github.com/41studio/rails_composer/master/files/" + filename, destination
+    get "https://raw.github.com/41studio/raser/master/files/" + filename, destination
   rescue OpenURI::HTTPError
     say_wizard "Unable to obtain #{filename} from the repo, please check your connection"
   end
