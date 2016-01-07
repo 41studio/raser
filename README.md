@@ -7,8 +7,8 @@ Raser is the base Rails application used at
 
 It includes application gems like:
 
-* [Airbrake](https://github.com/airbrake/airbrake) for exception notification
-* [Delayed Job](https://github.com/collectiveidea/delayed_job) for background
+* [Exception Notification](https://github.com/smartinez87/exception_notification) for exception notification
+* [Sidekiq](https://github.com/mperham/sidekiq) for background
   processing
 * [jQuery Rails](https://github.com/rails/jquery-rails) for jQuery
 * [New Relic RPM](https://github.com/newrelic/rpm) for monitoring performance
