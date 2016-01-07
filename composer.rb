@@ -54,6 +54,9 @@ gem 'jquery-turbolinks'
 gem 'friendly_id', '~> 5.1.0'
 gem 'simple_form'
 
+gem 'puma', group: "production"
+
+
 gem_group :development do
   gem 'thin'
   gem 'byebug'
@@ -72,9 +75,23 @@ gem_group :development do
   gem 'bullet'
   gem 'meta_request'
   gem 'awesome_print'
+  gem 'bundler-audit'
+  gem 'bootstrap-sass-extras'
   gem 'capistrano-rails'
   gem 'capistrano-rvm'
   gem 'capistrano3-puma', github: "seuros/capistrano-puma"
+end
+
+gem_group :test, :development do
+  gem 'rspec-rails'
+  gem 'formulaic'
+  gem 'shoulda-matchers', require: false
+  gem 'database_cleaner'
+  gem 'letter_opener_web', '~> 1.2.0'
+  gem 'timecop-console', :require => 'timecop_console'
+  gem 'capybara'
+  gem 'capybara-webkit'
+  gem 'capybara-email' 
 end
 
 application(nil, env: "development") do<<-'RUBY'
@@ -132,6 +149,10 @@ FILE
 end
 
 copy_from_repo "config/database-#{database_adapter}.yml", "config/database.yml"
+copy_from_repo "config/initializers/sidekiq.rb", "config/initializers/sidekiq.rb"
+copy_from_repo "config/initializers/devise_async.rb", "config/initializers/devise_async.rb"
+
+remove_file "app/views/layouts/application.html.erb"
 
 gsub_file "config/database.yml", /database: myapp_development/, "database: #{app_name}_development"
 gsub_file "config/database.yml", /database: myapp_test/,        "database: #{app_name}_test"
@@ -141,6 +162,8 @@ after_bundle do
   git :init
   generate 'devise:install'
   generate 'friendly_id'
+  generate 'bootstrap:install'
   generate 'simple_form:install --bootstrap'
-  run "bundle exec cap install STAGES=staging,production"
+  generate 'bootstrap:layout application fluid'
+  run "bundle exec cap install"
 end
