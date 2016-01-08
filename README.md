@@ -23,13 +23,14 @@ It includes application gems like:
 * [jQuery Rails](https://github.com/rails/jquery-rails) for jQuery
 * [New Relic RPM](https://github.com/newrelic/rpm) for monitoring performance
 * [Postgres](https://github.com/ged/ruby-pg) for access to the Postgres database
-* [Rack Canonical Host](https://github.com/tylerhunt/rack-canonical-host) to
-  ensure all requests are served from the same domain
-* [Rack Timeout](https://github.com/heroku/rack-timeout) to abort requests that are
-  taking too long
 * [Simple Form](https://github.com/plataformatec/simple_form) for form markup
   and style
 * [Puma](https://github.com/puma/puma) to serve HTTP requests
+* [Kaminari](https://github.com/amatsuda/kaminari) for paginator helper.
+* [Friendly Id](https://github.com/norman/friendly_id) for create pretty URL’s.
+* [Nprogress](https://github.com/caarlos0/nprogress-rails) Slim progress bars for Ajax'y applications
+* [Carrierwave](https://github.com/carrierwaveuploader/carrierwave) for file uploads helper.
+* [Sidekiq](https://github.com/mperham/sidekiq) for background processing.
 
 And development gems like:
 
