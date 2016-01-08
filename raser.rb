@@ -70,7 +70,6 @@ gem_group :development do
   gem 'foreman'
   gem 'pry-byebug'
   gem 'letter_opener_web', '~> 1.2.0'
-  gem 'rspec-rails'
   gem 'rails_best_practices'
   gem 'pry-rails'
   gem 'quiet_assets'
@@ -83,6 +82,7 @@ gem_group :development do
   gem 'awesome_print'
   gem 'bundler-audit'
   gem 'bootstrap-sass-extras'
+  gem 'spring'
 end
 
 gem_group :test, :development do
