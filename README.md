@@ -21,7 +21,6 @@ It includes application gems like:
 * [Sidekiq](https://github.com/mperham/sidekiq) for background
   processing
 * [jQuery Rails](https://github.com/rails/jquery-rails) for jQuery
-* [New Relic RPM](https://github.com/newrelic/rpm) for monitoring performance
 * [Postgres](https://github.com/ged/ruby-pg) for access to the Postgres database
 * [Simple Form](https://github.com/plataformatec/simple_form) for form markup
   and style
@@ -31,6 +30,8 @@ It includes application gems like:
 * [Nprogress](https://github.com/caarlos0/nprogress-rails) Slim progress bars for Ajax'y applications
 * [Carrierwave](https://github.com/carrierwaveuploader/carrierwave) for file uploads helper.
 * [Sidekiq](https://github.com/mperham/sidekiq) for background processing.
+* [Slim](https://github.com/slim-template/slim-rails) for template language.
+* [Devise](https://github.com/plataformatec/devise) for authentication.
 
 And development gems like:
 
@@ -80,13 +81,6 @@ And if you'd rather not use spring, add `DISABLE_SPRING=1` to your login file.
 If you have problems, please create a
 [GitHub Issue](https://github.com/41studio/raser/issues).
 
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md).
-
-Thank you, [contributors]!
-
-[contributors]: https://github.com/41studio/raser/graphs/contributors
 
 ## License
 
