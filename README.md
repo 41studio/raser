@@ -46,6 +46,11 @@ And development gems like:
   pre-loading
 * [Quiet Assets](https://github.com/evrone/quiet_assets) for muting assets
   pipeline log messages
+* [Rails Panel](https://github.com/dejan/rails_panel) for Chrome extension that will end your tailing of
+  development.log
+* [Rack Mini Profiler](https://github.com/MiniProfiler/rack-mini-profiler) for profiler your 
+  development Ruby rack apps.
+* [Better Errors](https://github.com/charliesome/better_errors) for better error page.
 
 And testing gems like:
 
