@@ -81,6 +81,11 @@ And if you'd rather not use spring, add `DISABLE_SPRING=1` to your login file.
 If you have problems, please create a
 [GitHub Issue](https://github.com/41studio/raser/issues).
 
+### How to Contribute
+
+* Fork the project
+* Writing new feature or fixing something
+* Perform a pull request in GitHub's web interface.
 
 ## License
 
