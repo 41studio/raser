@@ -1,5 +1,9 @@
 def say_custom(tag, text); say "\033[1m\033[36m" + tag.to_s.rjust(10) + "\033[0m" + "  #{text}" end
 
+def ask_wizard(question)
+  ask "\033[1m\033[36m" + ("option").rjust(10) + "\033[1m\033[36m" + "  #{question}\033[0m"
+end
+
 def whisper_ask_wizard(question)
   ask "\033[1m\033[36m" + ("choose").rjust(10) + "\033[0m" + "  #{question}"
 end
@@ -20,13 +24,16 @@ def copy_from_repo(filename, destination)
     remove_file destination
     get "https://raw.github.com/41studio/raser/master/files/" + filename, destination
   rescue OpenURI::HTTPError
-    say_wizard "Unable to obtain #{filename} from the repo, please check your connection"
+    say_custom "Unable to obtain #{filename} from the repo, please check your connection"
   end
 end
 
 gsub_file 'Gemfile', /gem 'sqlite3'\n/, ''
 
 database_adapter = multiple_choice "Database used in development?", [["PostgreSQL", "postgresql"], ["MySQL", "mysql2"]]
+
+db_username = ask_wizard("Database username?")
+db_password = ask_wizard("Database Password for user #{db_username}?")
 
 if database_adapter == "postgresql"
   gem 'pg'
@@ -41,7 +48,7 @@ gem 'mini_magick'
 gem 'carrierwave'
 gem 'carrierwave_backgrounder'
 gem 'kaminari'
-gem 'bootstrap-sass', '~> 3.3.6'
+gem 'bootstrap-sass'
 gem 'bootstrap-kaminari-views'
 gem 'slim-rails'
 gem 'nprogress-rails'
@@ -105,6 +112,16 @@ config.action_mailer.delivery_method = :letter_opener
 RUBY
 end
 
+application(nil, env: "production") do<<-'RUBY'
+config.middleware.use ExceptionNotification::Rack,
+  :email => {
+    :email_prefix         => "[#{app_name} notifier] ",
+    :sender_address       => %{"notifier" <notifier@#{app_name}.com>},
+    :exception_recipients => %w{your_email@41studio.com}
+  }
+RUBY
+end
+
 create_file 'Procfile', "web: bundle exec rails server \nsidekiq: bundle exec sidekiq" 
 
 create_file "app/assets/stylesheets/bootstrap_modified.scss" do<<-'SCSS'
@@ -130,6 +147,9 @@ create_file '.env' do <<-FILE
 # For example, setting:
 # GMAIL_USERNAME=Your_Gmail_Username
 # makes 'Your_Gmail_Username' available as ENV["GMAIL_USERNAME"]
+SMTP_EMAIL=''
+SMTP_PASSWORD=''
+SIDEKIQ_REDIS_URL=''
 FILE
 end
 
@@ -151,9 +171,12 @@ end
 copy_from_repo "config/database-#{database_adapter}.yml", "config/database.yml"
 copy_from_repo "config/initializers/sidekiq.rb", "config/initializers/sidekiq.rb"
 copy_from_repo "config/initializers/devise_async.rb", "config/initializers/devise_async.rb"
+copy_from_repo "lib/tasks/auto_annotate.rake", "lib/tasks/auto_annotate.rake"
 
 remove_file "app/views/layouts/application.html.erb"
 
+gsub_file "config/database.yml", /username: .*/, "username: #{db_username}"
+gsub_file "config/database.yml", /password:/, "password: #{db_password}"
 gsub_file "config/database.yml", /database: myapp_development/, "database: #{app_name}_development"
 gsub_file "config/database.yml", /database: myapp_test/,        "database: #{app_name}_test"
 gsub_file "config/database.yml", /database: myapp_production/,  "database: #{app_name}_production"
@@ -165,5 +188,7 @@ after_bundle do
   generate 'bootstrap:install'
   generate 'simple_form:install --bootstrap'
   generate 'bootstrap:layout application fluid'
+  generate 'carrierwave_backgrounder:install'
+  generate 'rspec:install'
   run "bundle exec cap install"
 end
