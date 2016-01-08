@@ -72,7 +72,6 @@ gem_group :development do
   gem 'letter_opener_web', '~> 1.2.0'
   gem 'rspec-rails'
   gem 'rails_best_practices'
-  gem 'lol_dba'
   gem 'pry-rails'
   gem 'quiet_assets'
   gem 'annotate', github: 'ctran/annotate_models'
@@ -84,12 +83,12 @@ gem_group :development do
   gem 'awesome_print'
   gem 'bundler-audit'
   gem 'bootstrap-sass-extras'
-  gem 'capistrano-rails'
-  gem 'capistrano-rvm'
-  gem 'capistrano3-puma', github: "seuros/capistrano-puma"
 end
 
 gem_group :test, :development do
+  gem 'capistrano-rails'
+  gem 'capistrano-rvm'
+  gem 'capistrano3-puma', github: "seuros/capistrano-puma"
   gem 'rspec-rails'
   gem 'formulaic'
   gem 'shoulda-matchers', require: false
