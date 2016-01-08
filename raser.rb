@@ -15,7 +15,7 @@ def multiple_choice(question, choices)
     values[(i + 1).to_s] = choice[1]
     say_custom( (i + 1).to_s + ')', choice[0] )
   end
-  answer = whisper_ask_wizard("Enter your selection:") while !values.keys.include?(answer)
+  answer = whisper_ask_wizard("Enter your selection(1/2):") while !values.keys.include?(answer)
   values[answer]
 end
 
