@@ -188,6 +188,8 @@ after_bundle do
   generate 'simple_form:install --bootstrap'
   generate 'bootstrap:layout application fluid'
   generate 'carrierwave_backgrounder:install'
+  gsub_file 'config/initializers/carrierwave_backgrounder.rb', /c.backend :delayed_job, queue: :carrierwave\n/ , ''
+  gsub_file 'config/initializers/carrierwave_backgrounder.rb', /# c.backend :sidekiq, queue: :carrierwave\n/ , 'c.backend :sidekiq, queue: :carrierwave'
   generate 'rspec:install'
   run "bundle exec cap install"
 end
