@@ -3,6 +3,16 @@
 Raser is the base Rails application used at
 [41studio](http://www.41studio.com/).
 
+## How To Use Raser
+
+To build a Rails application using the Raser tool:
+
+$ rails new myapp -m https://raw.github.com/41studio/raser/master/raser.rb
+Replace myapp with the name of your application.
+
+The $ character indicates a shell prompt; don’t include it when you run the command.
+
+
 ## Gemfile
 
 It includes application gems like:
