@@ -8,6 +8,7 @@ Raser is the base Rails application used at
 To build a Rails application using the Raser tool:
 
 $ rails new myapp -m https://raw.github.com/41studio/raser/master/raser.rb
+
 Replace myapp with the name of your application.
 
 The $ character indicates a shell prompt; don’t include it when you run the command.
@@ -53,6 +54,8 @@ And development gems like:
 * [Rack Mini Profiler](https://github.com/MiniProfiler/rack-mini-profiler) for profiler your 
   development Ruby rack apps.
 * [Better Errors](https://github.com/charliesome/better_errors) for better error page.
+* [Letter Opener web](https://github.com/fgrehm/letter_opener_web) for browsing sent emails.
+* [Annotate](https://github.com/ctran/annotate_models) for comment summarizing the current schema to the top of model, fixture, etc
 
 And testing gems like:
 
@@ -84,7 +87,10 @@ If you have problems, please create a
 ### How to Contribute
 
 * Fork the project
+* Create your feature or fix branch (`git checkout -b my-new-feature`)
 * Writing new feature or fixing something
+* Commit your changes (`git commit -am 'Add some feature'`)
+* Push to the branch (`git push origin my-new-feature`)
 * Perform a pull request in GitHub's web interface.
 
 ## License
