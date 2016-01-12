@@ -19,8 +19,6 @@ The $ character indicates a shell prompt; don’t include it when you run the co
 It includes application gems like:
 
 * [Exception Notification](https://github.com/smartinez87/exception_notification) for exception notification
-* [Sidekiq](https://github.com/mperham/sidekiq) for background
-  processing
 * [jQuery Rails](https://github.com/rails/jquery-rails) for jQuery
 * [Postgres](https://github.com/ged/ruby-pg) for access to the Postgres database
 * [Simple Form](https://github.com/plataformatec/simple_form) for form markup
