@@ -50,6 +50,7 @@ gem 'carrierwave_backgrounder'
 gem 'kaminari'
 gem 'bootstrap-sass'
 gem 'bootstrap-kaminari-views'
+gem 'bootstrap-sass-extras'
 gem 'slim-rails'
 gem 'nprogress-rails'
 gem 'exception_notification'
@@ -81,7 +82,6 @@ gem_group :development do
   gem 'meta_request'
   gem 'awesome_print'
   gem 'bundler-audit'
-  gem 'bootstrap-sass-extras'
   gem 'spring'
 end
 
